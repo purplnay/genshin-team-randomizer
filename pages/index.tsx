@@ -1,5 +1,8 @@
+import clsx from "clsx";
 import Image from "next/image";
 import { FormEvent, useState } from "react";
+import Checkbox from "~/components/Checkbox";
+import Toggler from "~/components/Toggler";
 import { Character, characters } from "~/lib/characters";
 
 export default function Home() {
@@ -76,157 +79,44 @@ export default function Home() {
 
       <form onSubmit={generateTeam}>
         <div>
-          <label htmlFor="anemo">Anemo</label>
-          <input
-            id="anemo"
-            type="checkbox"
-            checked={elements.anemo}
-            onChange={(e) =>
-              setElements({ ...elements, anemo: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="geo">Geo</label>
-          <input
-            id="geo"
-            type="checkbox"
-            checked={elements.geo}
-            onChange={(e) =>
-              setElements({ ...elements, geo: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="electro">Electro</label>
-          <input
-            id="electro"
-            type="checkbox"
-            checked={elements.electro}
-            onChange={(e) =>
-              setElements({ ...elements, electro: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="dendro">Dendro</label>
-          <input
-            id="dendro"
-            type="checkbox"
-            checked={elements.dendro}
-            onChange={(e) =>
-              setElements({ ...elements, dendro: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="hydro">Hydro</label>
-          <input
-            id="hydro"
-            type="checkbox"
-            checked={elements.hydro}
-            onChange={(e) =>
-              setElements({ ...elements, hydro: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="pyro">Pyro</label>
-          <input
-            id="pyro"
-            type="checkbox"
-            checked={elements.pyro}
-            onChange={(e) =>
-              setElements({ ...elements, pyro: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="cryo">Cryo</label>
-          <input
-            id="cryo"
-            type="checkbox"
-            checked={elements.cryo}
-            onChange={(e) =>
-              setElements({ ...elements, cryo: e.target.checked })
-            }
-          />
+          <p>Elements</p>
+          <div className="flex flex-wrap">
+            {Object.keys(elements).map((element) => (
+              <Toggler
+                key={element}
+                label={element[0].toUpperCase() + element.substring(1)}
+                image={`/elements/${element}.webp`}
+                onToggle={(v) => setElements({ ...elements, [element]: v })}
+              />
+            ))}
+          </div>
         </div>
 
-        <br />
         <div>
-          <label htmlFor="sword">Sword</label>
-          <input
-            id="sword"
-            type="checkbox"
-            checked={weapons.sword}
-            onChange={(e) =>
-              setWeapons({ ...weapons, sword: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="polearm">Polearm</label>
-          <input
-            id="polearm"
-            type="checkbox"
-            checked={weapons.polearm}
-            onChange={(e) =>
-              setWeapons({ ...weapons, polearm: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="claymore">Claymore</label>
-          <input
-            id="claymore"
-            type="checkbox"
-            checked={weapons.claymore}
-            onChange={(e) =>
-              setWeapons({ ...weapons, claymore: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="catalyst">Catalyst</label>
-          <input
-            id="catalyst"
-            type="checkbox"
-            checked={weapons.catalyst}
-            onChange={(e) =>
-              setWeapons({ ...weapons, catalyst: e.target.checked })
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="bow">Bow</label>
-          <input
-            id="bow"
-            type="checkbox"
-            checked={weapons.bow}
-            onChange={(e) => setWeapons({ ...weapons, bow: e.target.checked })}
-          />
+          <p>Weapons</p>
+          <div className="flex flex-wrap">
+            {Object.keys(weapons).map((weapon) => (
+              <Toggler
+                key={weapon}
+                label={weapon[0].toUpperCase() + weapon.substring(1)}
+                image={`/weapons/${weapon}.webp`}
+                onToggle={(v) => setWeapons({ ...weapons, [weapon]: v })}
+              />
+            ))}
+          </div>
         </div>
 
-        <br />
-
         <div>
-          <label htmlFor="four-star">4 Star</label>
-          <input
-            id="four-star"
-            type="checkbox"
-            checked={rarity[4]}
-            onChange={(e) => setRarity({ ...rarity, [4]: e.target.checked })}
-          />
-        </div>
-        <div>
-          <label htmlFor="five-star">5 Star</label>
-          <input
-            id="five-star"
-            type="checkbox"
-            checked={rarity[5]}
-            onChange={(e) => setRarity({ ...rarity, [5]: e.target.checked })}
-          />
+          <p>Rarity</p>
+          <div className="flex">
+            {Object.keys(rarity).map((r) => (
+              <Checkbox
+                key={r}
+                label={`${r} stars`}
+                onToggle={(v) => setRarity({ ...rarity, [r]: v })}
+              />
+            ))}
+          </div>
         </div>
 
         <button className="bg-blue-400 px-4 py-2" type="submit">
