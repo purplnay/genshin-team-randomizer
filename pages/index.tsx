@@ -163,7 +163,7 @@ export default function Home() {
             className="rounded bg-yellow-300 px-4 py-1 text-center text-xs text-black shadow-lg "
             href="/versions"
           >
-            <p>
+            <p className="select-none">
               Updated for version <strong>3.5 Phase 2</strong>!
             </p>
           </Link>
