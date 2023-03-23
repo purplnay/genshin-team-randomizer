@@ -28,6 +28,10 @@ export default function Home() {
     5: true,
   });
 
+  const [selected, setSelected] = useState(
+    characters.map((character) => character.id)
+  );
+
   const filteredCharacters = characters
     .filter((character) => elements[character.element])
     .filter((character) => weapons[character.weapon])
@@ -36,16 +40,17 @@ export default function Home() {
   function generateTeam(e: FormEvent) {
     e.preventDefault();
 
+    const filtered = filteredCharacters.filter((item) =>
+      selected.includes(item.id)
+    );
+
     const selection: Character[] = [];
 
-    if (filteredCharacters.length <= 4) {
-      selection.push(...filteredCharacters);
+    if (filtered.length <= 4) {
+      selection.push(...filtered);
     } else {
       while (selection.length < 4) {
-        const char =
-          filteredCharacters[
-            Math.floor(Math.random() * filteredCharacters.length)
-          ];
+        const char = filtered[Math.floor(Math.random() * filtered.length)];
 
         if (!selection.find((item) => item.id === char.id)) {
           selection.push(char);
@@ -229,19 +234,47 @@ export default function Home() {
         </button>
       </form>
 
-      <ul>
-        {filteredCharacters.map((character) => (
-          <li key={character.id}>
-            <p>{character.name}</p>
-            <Image
-              src={`/icons/${character.id}.webp`}
-              alt={character.name}
-              width={64}
-              height={64}
-            />
-          </li>
-        ))}
-      </ul>
+      <div>
+        <div>
+          <button
+            onClick={() =>
+              setSelected(characters.map((character) => character.id))
+            }
+          >
+            Select all
+          </button>
+          <button onClick={() => setSelected([])}>Deselect all</button>
+        </div>
+
+        <ul>
+          {filteredCharacters.map((character) => (
+            <li
+              key={character.id}
+              className={selected.includes(character.id) ? "" : "opacity-50"}
+            >
+              <p>{character.name}</p>
+              <button
+                onClick={() =>
+                  setSelected((s) => {
+                    if (!s.includes(character.id)) {
+                      return [...s, character.id];
+                    }
+
+                    return s.filter((item) => item !== character.id);
+                  })
+                }
+              >
+                <Image
+                  src={`/icons/${character.id}.webp`}
+                  alt={character.name}
+                  width={64}
+                  height={64}
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
