@@ -6,6 +6,9 @@ interface Props {
   onToggle(v: boolean): any;
 }
 
+/**
+ * A button used as a checkbox.
+ */
 export default function Checkbox({ label, onToggle }: Props) {
   const id = useId();
 

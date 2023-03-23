@@ -8,6 +8,9 @@ interface Props {
   onToggle(val: boolean): any;
 }
 
+/**
+ * A toggleable image.
+ */
 export default function Toggler({ label, image, onToggle }: Props) {
   const id = useId();
 

@@ -6,8 +6,14 @@ import Toggler from "~/components/Toggler";
 import { Character, characters } from "~/lib/characters";
 
 export default function Home() {
+  /**
+   * The latest generated team.
+   */
   const [team, setTeam] = useState<Character[]>([]);
 
+  /**
+   * The active elements.
+   */
   const [elements, setElements] = useState({
     anemo: true,
     geo: true,
@@ -18,6 +24,9 @@ export default function Home() {
     cryo: true,
   });
 
+  /**
+   * The active weapon types.
+   */
   const [weapons, setWeapons] = useState({
     sword: true,
     polearm: true,
@@ -26,25 +35,41 @@ export default function Home() {
     bow: true,
   });
 
+  /**
+   * The active rarities.
+   */
   const [rarity, setRarity] = useState({
     4: true,
     5: true,
   });
 
+  /**
+   * The selected characters.
+   */
   const [selected, setSelected] = useState(
     characters.map((character) => character.id)
   );
 
+  /**
+   * The character search by name.
+   */
   const [search, setSearch] = useState("");
 
+  /**
+   * The filtered characters.
+   */
   const filteredCharacters = characters
     .filter((character) => elements[character.element])
     .filter((character) => weapons[character.weapon])
     .filter((character) => rarity[character.rarity]);
 
+  /**
+   * Generate a random team based on current filters.
+   */
   function generateTeam(e: FormEvent) {
     e.preventDefault();
 
+    // Filter all chars (and traveler out)
     const filtered = filteredCharacters.filter(
       (item) =>
         selected.includes(item.id) &&
@@ -52,15 +77,18 @@ export default function Home() {
         !item.id.includes("lumine")
     );
 
+    // Get the active travelers
     const travelers = filteredCharacters.filter(
       (item) =>
         item.id.includes("aether") ||
         (item.id.includes("lumine") && selected.includes(item.id))
     );
 
+    // Pick a random traveler
     const traveler =
       travelers[Math.floor(Math.random() * travelers.length)] || null;
 
+    // Add the traveler to the active chars if any
     if (traveler) {
       filtered.push(traveler);
     }
@@ -68,11 +96,13 @@ export default function Home() {
     const selection: Character[] = [];
 
     if (filtered.length <= 4) {
+      // Just use the whole list
       selection.push(...filtered);
     } else {
       while (selection.length < 4) {
         const char = filtered[Math.floor(Math.random() * filtered.length)];
 
+        // Only add a char once
         if (!selection.find((item) => item.id === char.id)) {
           selection.push(char);
         }
