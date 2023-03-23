@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
@@ -134,6 +135,28 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Genshin Team Randomizer</title>
+        <meta
+          name="description"
+          content="A Genshin tool to generate random teams."
+        />
+        <meta property="og:title" content="Genshin Team Randomizer" />
+        <meta property="og:site_name" content="Genshin Team Randomizer" />
+        <meta
+          property="og:url"
+          content="https://genshin-team-randomizer.vercel.app"
+        />
+        <meta
+          property="og:description"
+          content="A Genshin tool to generate random teams."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://genshin-team-randomizer.vercel.app/og-banner.png"
+        />
+      </Head>
       <div className="md:container md:mx-auto">
         <div className="mt-6 flex justify-center">
           <Link
