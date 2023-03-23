@@ -163,7 +163,7 @@ export const characters: Character[] = [
   },
   {
     id: "kaedehara-kazuha",
-    name: "Kaedehara Kazuha",
+    name: "Kazuha",
     element: "anemo",
     weapon: "sword",
     rarity: 5,
