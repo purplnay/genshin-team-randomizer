@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Image from "next/image";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Checkbox from "~/components/Checkbox";
 import Toggler from "~/components/Toggler";
 import { Character, characters } from "~/lib/characters";
@@ -49,6 +49,22 @@ export default function Home() {
   const [selected, setSelected] = useState(
     characters.map((character) => character.id)
   );
+
+  // Keep in sync with localStorage (ref to track only next renders)
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      const ids = localStorage.getItem("selected");
+
+      if (ids) {
+        setSelected(JSON.parse(ids));
+      }
+
+      isFirstRender.current = false;
+    } else {
+      localStorage.setItem("selected", JSON.stringify(selected));
+    }
+  }, [selected]);
 
   /**
    * The character search by name.
