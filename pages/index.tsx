@@ -80,8 +80,8 @@ export default function Home() {
     // Get the active travelers
     const travelers = filteredCharacters.filter(
       (item) =>
-        item.id.includes("aether") ||
-        (item.id.includes("lumine") && selected.includes(item.id))
+        selected.includes(item.id) &&
+        (item.id.includes("aether") || item.id.includes("lumine"))
     );
 
     // Pick a random traveler
