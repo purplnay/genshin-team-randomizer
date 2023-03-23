@@ -8,34 +8,6 @@ export interface Character {
 
 export const characters: Character[] = [
   {
-    id: "aether-anemo",
-    name: "Aether (Anemo)",
-    element: "anemo",
-    weapon: "sword",
-    rarity: 5,
-  },
-  {
-    id: "aether-geo",
-    name: "Aether (Geo)",
-    element: "geo",
-    weapon: "sword",
-    rarity: 5,
-  },
-  {
-    id: "aether-electro",
-    name: "Aether (Electro)",
-    element: "electro",
-    weapon: "sword",
-    rarity: 5,
-  },
-  {
-    id: "aether-dendro",
-    name: "Aether (Dendro)",
-    element: "dendro",
-    weapon: "sword",
-    rarity: 5,
-  },
-  {
     id: "albedo",
     name: "Albedo",
     element: "geo",
@@ -283,6 +255,34 @@ export const characters: Character[] = [
   {
     id: "lumine-dendro",
     name: "Lumine (Dendro)",
+    element: "dendro",
+    weapon: "sword",
+    rarity: 5,
+  },
+  {
+    id: "aether-anemo",
+    name: "Aether (Anemo)",
+    element: "anemo",
+    weapon: "sword",
+    rarity: 5,
+  },
+  {
+    id: "aether-geo",
+    name: "Aether (Geo)",
+    element: "geo",
+    weapon: "sword",
+    rarity: 5,
+  },
+  {
+    id: "aether-electro",
+    name: "Aether (Electro)",
+    element: "electro",
+    weapon: "sword",
+    rarity: 5,
+  },
+  {
+    id: "aether-dendro",
+    name: "Aether (Dendro)",
     element: "dendro",
     weapon: "sword",
     rarity: 5,

@@ -1,3 +1,4 @@
+import autoAnimate from "@formkit/auto-animate";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,6 +46,15 @@ export default function Home() {
     4: true,
     5: true,
   });
+
+  /**
+   * List ref for auto-animate.
+   */
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    listRef.current && autoAnimate(listRef.current);
+  }, [listRef]);
 
   /**
    * The selected characters.
@@ -160,6 +170,13 @@ export default function Home() {
       </div>
 
       <form onSubmit={generateTeam}>
+        <button
+          className="rounded bg-purple-400 px-4 py-2 text-white"
+          type="submit"
+        >
+          Generate team
+        </button>
+
         <FilterSection title="Elements">
           {Object.keys(elements).map((element) => (
             <Toggler
@@ -191,13 +208,6 @@ export default function Home() {
             />
           ))}
         </FilterSection>
-
-        <button
-          className="rounded bg-purple-400 px-4 py-2 text-white"
-          type="submit"
-        >
-          Generate team
-        </button>
       </form>
 
       <div>
@@ -230,7 +240,7 @@ export default function Home() {
           <button onClick={() => setSearch("")}>X</button>
         </div>
 
-        <ul>
+        <ul ref={listRef}>
           {filteredCharacters
             .filter((character) =>
               character.name.toLowerCase().includes(search.toLowerCase())

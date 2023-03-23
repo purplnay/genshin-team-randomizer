@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply bg-zinc-800 px-6 py-2 text-zinc-50;
+    @apply overflow-y-scroll bg-zinc-800 px-6 py-2 text-zinc-50;
   }
 
   *::selection {
