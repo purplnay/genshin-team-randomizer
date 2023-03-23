@@ -13,16 +13,18 @@ export default function TeamCharacter({ character }: Props) {
   return (
     <div className="flex flex-1">
       <div className="flex flex-col items-center">
-        <Image
-          className="mb-1 rounded"
-          src={src}
-          alt={name}
-          width={112}
-          height={112}
-          style={{
-            backgroundColor: character && elements[character.element] + "af",
-          }}
-        />
+        <picture>
+          <img
+            className="mb-1 rounded"
+            src={src}
+            alt={name}
+            width={112}
+            height={112}
+            style={{
+              backgroundColor: character && elements[character.element] + "af",
+            }}
+          />
+        </picture>
         <p className="text-center text-sm">{name}</p>
       </div>
     </div>
