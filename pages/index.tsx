@@ -35,6 +35,8 @@ export default function Home() {
     characters.map((character) => character.id)
   );
 
+  const [search, setSearch] = useState("");
+
   const filteredCharacters = characters
     .filter((character) => elements[character.element])
     .filter((character) => weapons[character.weapon])
@@ -43,9 +45,25 @@ export default function Home() {
   function generateTeam(e: FormEvent) {
     e.preventDefault();
 
-    const filtered = filteredCharacters.filter((item) =>
-      selected.includes(item.id)
+    const filtered = filteredCharacters.filter(
+      (item) =>
+        selected.includes(item.id) &&
+        !item.id.includes("aether") &&
+        !item.id.includes("lumine")
     );
+
+    const travelers = filteredCharacters.filter(
+      (item) =>
+        item.id.includes("aether") ||
+        (item.id.includes("lumine") && selected.includes(item.id))
+    );
+
+    const traveler =
+      travelers[Math.floor(Math.random() * travelers.length)] || null;
+
+    if (traveler) {
+      filtered.push(traveler);
+    }
 
     const selection: Character[] = [];
 
@@ -119,7 +137,10 @@ export default function Home() {
           </div>
         </div>
 
-        <button className="bg-blue-400 px-4 py-2" type="submit">
+        <button
+          className="rounded bg-purple-400 px-4 py-2 text-white"
+          type="submit"
+        >
           Generate team
         </button>
       </form>
@@ -127,42 +148,64 @@ export default function Home() {
       <div>
         <div>
           <button
+            className="rounded bg-purple-400 px-4 py-2 text-sm text-white disabled:opacity-70"
+            disabled={selected.length === characters.length}
             onClick={() =>
               setSelected(characters.map((character) => character.id))
             }
           >
             Select all
           </button>
-          <button onClick={() => setSelected([])}>Deselect all</button>
+          <button
+            className="rounded bg-purple-400 px-4 py-2 text-sm text-white disabled:opacity-70"
+            disabled={!selected.length}
+            onClick={() => setSelected([])}
+          >
+            Deselect all
+          </button>
+        </div>
+
+        <div>
+          <input
+            placeholder="Search name"
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button onClick={() => setSearch("")}>X</button>
         </div>
 
         <ul>
-          {filteredCharacters.map((character) => (
-            <li
-              key={character.id}
-              className={selected.includes(character.id) ? "" : "opacity-50"}
-            >
-              <p>{character.name}</p>
-              <button
-                onClick={() =>
-                  setSelected((s) => {
-                    if (!s.includes(character.id)) {
-                      return [...s, character.id];
-                    }
-
-                    return s.filter((item) => item !== character.id);
-                  })
-                }
+          {filteredCharacters
+            .filter((character) =>
+              character.name.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((character) => (
+              <li
+                key={character.id}
+                className={selected.includes(character.id) ? "" : "opacity-50"}
               >
-                <Image
-                  src={`/icons/${character.id}.webp`}
-                  alt={character.name}
-                  width={64}
-                  height={64}
-                />
-              </button>
-            </li>
-          ))}
+                <p>{character.name}</p>
+                <button
+                  onClick={() =>
+                    setSelected((s) => {
+                      if (!s.includes(character.id)) {
+                        return [...s, character.id];
+                      }
+
+                      return s.filter((item) => item !== character.id);
+                    })
+                  }
+                >
+                  <Image
+                    src={`/icons/${character.id}.webp`}
+                    alt={character.name}
+                    width={64}
+                    height={64}
+                  />
+                </button>
+              </li>
+            ))}
         </ul>
       </div>
     </div>

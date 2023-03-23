@@ -15,7 +15,7 @@ export default function Checkbox({ label, onToggle }: Props) {
   return (
     <div
       className={clsx(
-        "cursor-pointer bg-purple-400 px-4 py-2 text-black",
+        "cursor-pointer rounded bg-purple-400 px-4 py-2 text-sm text-white",
         !checked && "opacity-70"
       )}
     >

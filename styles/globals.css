@@ -10,4 +10,8 @@
   body {
     @apply bg-zinc-800 px-6 py-2 text-zinc-50;
   }
+
+  *::selection {
+    @apply bg-purple-300 text-black;
+  }
 }
