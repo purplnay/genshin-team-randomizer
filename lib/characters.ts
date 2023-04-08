@@ -295,6 +295,13 @@ export const characters: Character[] = [
     rarity: 5,
   },
   {
+    id: "mika",
+    name: "Mika",
+    element: "cryo",
+    weapon: "polearm",
+    rarity: 4,
+  },
+  {
     id: "nahida",
     name: "Nahida",
     element: "dendro",
