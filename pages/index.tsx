@@ -59,6 +59,7 @@ export default function Home() {
   const isFirstRender = useRef(true);
   useEffect(() => {
     if (isFirstRender.current) {
+      // Load from localStorage
       const ids = localStorage.getItem("selected");
 
       if (ids) {
@@ -66,7 +67,11 @@ export default function Home() {
       }
 
       isFirstRender.current = false;
+    } else if (selected.length === characters.length) {
+      // Remove from localStorage if all are selected
+      localStorage.removeItem("selected");
     } else {
+      // Save to localStorage if not all are selected
       localStorage.setItem("selected", JSON.stringify(selected));
     }
   }, [selected]);
