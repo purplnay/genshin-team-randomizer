@@ -169,7 +169,7 @@ export default function Home() {
             href="/versions"
           >
             <p className="select-none">
-              Updated for version <strong>3.5 Phase 2</strong>!
+              Updated for version <strong>3.6 Phase 2</strong>!
             </p>
           </Link>
         </div>

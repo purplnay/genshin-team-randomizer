@@ -43,6 +43,13 @@ export const characters: Character[] = [
     rarity: 5,
   },
   {
+    id: "baizhu",
+    name: "Baizhu",
+    element: "dendro",
+    weapon: "catalyst",
+    rarity: 5,
+  },
+  {
     id: "barbara",
     name: "Barbara",
     element: "hydro",
@@ -188,6 +195,13 @@ export const characters: Character[] = [
     element: "hydro",
     weapon: "sword",
     rarity: 5,
+  },
+  {
+    id: "kaveh",
+    name: "Kaveh",
+    element: "dendro",
+    weapon: "claymore",
+    rarity: 4,
   },
   {
     id: "keqing",
