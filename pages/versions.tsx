@@ -43,6 +43,14 @@ export default function Versions() {
 
       <div className="space-y-6">
         <section className="mx-auto w-72 text-left md:w-96">
+          <h2 className="mb-2 text-lg font-medium">Patch 3.7</h2>
+
+          <ul className="list-disc text-sm text-zinc-300">
+            <li>Added Kirara (Phase 1)</li>
+          </ul>
+        </section>
+
+        <section className="mx-auto w-72 text-left md:w-96">
           <h2 className="mb-2 text-lg font-medium">Patch 3.6</h2>
 
           <ul className="list-disc text-sm text-zinc-300">
